@@ -1,6 +1,8 @@
 import { Module } from '@nestjs/common';
+import { ConfigModule } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { databaseConfig } from './config/database.config';
+import { databaseConfigAsync } from './config/database.config';
+import configuration from './config/configuration';
 import { Category } from './entities/category.entity';
 import { File } from './entities/file.entity';
 import { SeederModule } from './database/seeder.module';
@@ -10,7 +12,11 @@ import { CategoriesModule } from './categories/categories.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forRoot(databaseConfig),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      load: [configuration],
+    }),
+    TypeOrmModule.forRootAsync(databaseConfigAsync),
     TypeOrmModule.forFeature([Category, File]),
     SeederModule,
     CommandsModule,
