@@ -8,8 +8,10 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
+const config_1 = require("@nestjs/config");
 const typeorm_1 = require("@nestjs/typeorm");
 const database_config_1 = require("./config/database.config");
+const configuration_1 = require("./config/configuration");
 const category_entity_1 = require("./entities/category.entity");
 const file_entity_1 = require("./entities/file.entity");
 const seeder_module_1 = require("./database/seeder.module");
@@ -22,7 +24,11 @@ exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forRoot(database_config_1.databaseConfig),
+            config_1.ConfigModule.forRoot({
+                isGlobal: true,
+                load: [configuration_1.default],
+            }),
+            typeorm_1.TypeOrmModule.forRootAsync(database_config_1.databaseConfigAsync),
             typeorm_1.TypeOrmModule.forFeature([category_entity_1.Category, file_entity_1.File]),
             seeder_module_1.SeederModule,
             command_module_1.CommandsModule,

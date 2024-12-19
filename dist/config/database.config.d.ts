@@ -1,2 +1,2 @@
-import { TypeOrmModuleOptions } from '@nestjs/typeorm';
-export declare const databaseConfig: TypeOrmModuleOptions;
+import { TypeOrmModuleAsyncOptions } from '@nestjs/typeorm';
+export declare const databaseConfigAsync: TypeOrmModuleAsyncOptions;

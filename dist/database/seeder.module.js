@@ -20,7 +20,7 @@ exports.SeederModule = SeederModule;
 exports.SeederModule = SeederModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forRoot(database_config_1.databaseConfig),
+            typeorm_1.TypeOrmModule.forRootAsync(database_config_1.databaseConfigAsync),
             typeorm_1.TypeOrmModule.forFeature([category_entity_1.Category, file_entity_1.File]),
         ],
         providers: [category_seeder_1.CategorySeeder, file_seeder_1.FileSeeder],
